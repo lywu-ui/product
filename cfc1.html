@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Flexbot Company - Window Cleaning Robot</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Gradient backgrounds */
+    .hero-gradient {
+      background: linear-gradient(to right, #a7f3d0, #67e8f9, #f0f9ff);
+    }
+    .alfabot-section-gradient {
+      background: linear-gradient(to bottom right, #f0f9ff, #dcfce7, #a7f3d0);
+    }
+    .connect-gradient {
+      background: linear-gradient(to top left, #a7f3d0, #67e8f9);
+    }
+
+    /* Video button */
+    .play-button {
+      width: 70px;
+      height: 70px;
+      background-color: rgba(255, 255, 255, 0.85);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    /* Entry animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .card {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    .grid > div:nth-child(1) { animation-delay: 0.1s; }
+    .grid > div:nth-child(2) { animation-delay: 0.3s; }
+    .grid > div:nth-child(3) { animation-delay: 0.5s; }
+
+    /* Hover effects */
+    .card:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+                  0 10px 10px -5px rgba(0, 0, 0, 0.04);
+                  
+    }
+
+    /* New model section hover */
+    .new-model:hover {
+      transform: scale(1.02);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    /* Button hover animation */
+    .cta-button {
+      transition: transform 0.2s ease;
+    }
+
+    .cta-button:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+
+<body class="font-sans antialiased text-gray-800">
+
+  <!-- HERO -->
+  <header class="hero-gradient pt-10 pb-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row justify-between items-start mb-16">
+        <div class="space-y-4">
+          <span class="text-3xl font-bold text-gray-700">Flexbot Company</span>
+          <h1 class="text-5xl font-extrabold text-gray-900">Window Cleaning Robot</h1>
+          <div class="flex space-x-4">
+            <a href="#" class="cta-button px-5 py-2 text-sm font-semibold rounded-full text-white bg-teal-600 hover:bg-teal-700 shadow-md">Buy Now</a>
+            <a href="#" class="cta-button px-5 py-2 text-sm font-semibold rounded-full border border-teal-600 text-teal-600 hover:bg-white/50">Shop All</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIDEO + INTRO -->
+      <div class="bg-white/70 backdrop-blur-sm rounded-xl p-6 md:p-10 shadow-2xl grid md:grid-cols-2 gap-8 items-center mt-12">
+        <div class="relative w-full aspect-video rounded-lg overflow-hidden shadow-lg bg-gray-200 flex items-center justify-center">
+          <video class="w-full h-full object-cover" src="video.MP4" autoplay muted loop></video>
+          <button class="play-button text-teal-600 absolute">
+            <svg class="w-8 h-8 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </div>
+        
+        <div class="md:text-left text-center">
+          <p class="text-sm font-medium text-gray-600 mb-1">The best product is here.</p>
+          <h2 class="text-3xl font-extrabold text-gray-900 mb-2">Window Cleaning Robot</h2>
+          <h3 class="text-xl font-bold text-teal-600 mb-4">Alfabot X8</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            High Quality Smart Automatic Window Cleaning Robot with Infrared Remote Control, Dual Water Spray, and Frame Detection.
+          </p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- PRODUCTS GRID -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-bold text-center mb-10">Smart Window Cleaning Robots</h2>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- CARD 1 -->
+        <div class="card p-6 border-4 border-teal-500 rounded-xl shadow-xl text-center transition-transform duration-300 ease-in-out">
+          <img src="Alfabotx8.png" alt="Alfabot X8" class="mx-auto h-40 mb-4 object-contain">
+          <h3 class="text-xl font-bold text-teal-600 mb-2">ALFABOT</h3>
+          <div class="text-left text-sm space-y-1 text-gray-600">
+            <p><span class="font-semibold">Dimensions:</span> 24x24x9cm</p>
+            <p><span class="font-semibold">Water Tanks:</span> 1x40ml</p>
+            <p><span class="font-semibold">Suction:</span> ~2,200pa</p>
+            <p><span class="font-semibold">Power Range:</span> 100-240v</p>
+            <p><span class="font-semibold">Modes:</span> Auto, Spot</p>
+            <p><span class="font-semibold">Price:</span> ~USD 130</p>
+          </div>
+        </div>
+
+        <!-- CARD 2 -->
+        <div class="card p-6 border-4 border-teal-500 rounded-xl shadow-xl text-center transition-transform duration-300 ease-in-out">
+          <img src="Alfabotx7.png" alt="Alfabot X7" class="mx-auto h-40 mb-4 object-contain">
+          <h3 class="text-xl font-bold text-gray-800 mb-2">ALFABOT X7</h3>
+          <div class="text-left text-sm space-y-1 text-gray-600">
+            <p><span class="font-semibold">Dimensions:</span> 25x25x9.3cm</p>
+            <p><span class="font-semibold">Water Tanks:</span> 1x40ml</p>
+            <p><span class="font-semibold">Suction:</span> ~2,600pa</p>
+            <p><span class="font-semibold">Power Range:</span> 100-240v</p>
+            <p><span class="font-semibold">Modes:</span> Edge, Cleaning</p>
+            <p><span class="font-semibold">Price:</span> ~USD 150</p>
+          </div>
+        </div>
+
+        <!-- CARD 3 -->
+        <div class="card p-6 border-4 border-teal-500 rounded-xl shadow-xl text-center transition-transform duration-300 ease-in-out">
+          <img src="Alfabotxt10s.png" alt="Alfabot XT10S" class="mx-auto h-40 mb-4 object-contain">
+          <h3 class="text-xl font-bold text-gray-800 mb-2">ALFABOT X7SE</h3>
+          <div class="text-left text-sm space-y-1 text-gray-600">
+            <p><span class="font-semibold">Dimensions:</span> 25x25x9.3cm</p>
+            <p><span class="font-semibold">Water Tanks:</span> 1x56ml</p>
+            <p><span class="font-semibold">Suction:</span> ~2,600pa</p>
+            <p><span class="font-semibold">Power Range:</span> 100-240v</p>
+            <p><span class="font-semibold">Modes:</span> Edge, Manual</p>
+            <p><span class="font-semibold">Price:</span> ~USD 170</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-10">
+        <a href="#" class="cta-button px-6 py-2 text-sm font-semibold rounded-full border border-gray-700 text-gray-700 hover:bg-gray-100 transition">
+          Shop All
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEW MODEL -->
+  <section class="alfabot-section-gradient py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 new-model">
+      <div class="grid md:grid-cols-2 gap-10 items-center">
+        <div class="p-6 border-4 border-teal-500 rounded-xl shadow-xl text-center">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">New Model Alfabot X8</h2>
+          <ul class="space-y-3 text-gray-700 text-lg">
+            <li class="flex justify-between border-b border-gray-300 pb-2">
+              <span class="font-semibold">Dimensions:</span> <span>26.7 x 26 x 9 cm</span>
+            </li>
+            <li class="flex justify-between border-b border-gray-300 pb-2">
+              <span class="font-semibold">Water Tanks:</span> <span>2 x 80 ml</span>
+            </li>
+            <li class="flex justify-between border-b border-gray-300 pb-2">
+              <span class="font-semibold">Suction:</span> <span>Auto, Spot, Edge, Frame detection</span>
+            </li>
+            <li class="flex justify-between border-b border-gray-300 pb-2">
+              <span class="font-semibold">Price:</span> <span>~USD 190</span>
+            </li>
+          </ul>
+        </div>
+        <div class="order-1 md:order-2 flex justify-center">
+          <img src="Newmodel.png" alt="Alfabot X8 Large View" class="w-full max-w-sm rounded-lg shadow-2xl">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="connect-gradient pt-16 pb-10 text-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold mb-10">Connect with Us</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div class="space-y-4">
+          <h3 class="font-semibold text-lg">Main Office</h3>
+          <p class="text-sm">
+            123 Anywhere St.<br>Siem Reap, Cambodia<br>(+001) 78976757
+          </p>
+        </div>
+
+        <div class="space-y-3">
+          <h3 class="font-semibold text-lg">Social Media</h3>
+          <ul class="text-sm space-y-1">
+            <li><a href="#" class="hover:text-teal-600">Facebook</a></li>
+            <li><a href="#" class="hover:text-teal-600">Instagram</a></li>
+            <li><a href="#" class="hover:text-teal-600">Tiktok@flexbotcompany</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="font-semibold text-lg">Email</h3>
+          <p class="text-sm">
+            Email: <a href="mailto:flexbotcompany@gmail.com" class="hover:text-teal-600">flexbotcompany@gmail.com</a>
+          </p>
+        </div>
+      </div>
+
+      <div class="text-center mt-12 pt-6 border-t border-gray-300 text-sm text-gray-600">
+        &copy; 2025 Flexbot Company.
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
