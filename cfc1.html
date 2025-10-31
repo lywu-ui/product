@@ -1,240 +1,709 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Flexbot Company - Window Cleaning Robot</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    /* Gradient backgrounds */
-    .hero-gradient {
-      background: linear-gradient(to right, #a7f3d0, #67e8f9, #f0f9ff);
-    }
-    .alfabot-section-gradient {
-      background: linear-gradient(to bottom right, #f0f9ff, #dcfce7, #a7f3d0);
-    }
-    .connect-gradient {
-      background: linear-gradient(to top left, #a7f3d0, #67e8f9);
-    }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Flexbot Company - Alfabot X8</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Load Inter Google Font (The standard "Gemini" font) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 
-    /* Video button */
-    .play-button {
-      width: 70px;
-      height: 70px;
-      background-color: rgba(255, 255, 255, 0.85);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: background-color 0.2s;
-    }
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        // UPDATED: Using Inter font for a clean, professional look
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'flex-teal': {
+                            500: '#10b981', // Medium teal/green
+                            600: '#059669', // Darker for buttons/accents
+                            700: '#047857', // Even darker for accents
+                        },
+                        'flex-blue': '#38bdf8', // Light blue accent
+                        'gray-product': '#f9fafb', // Very light gray background for details
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Base Gradient for Hero/Connect */
+        .hero-gradient {
+            background: linear-gradient(135deg, #ecfdf5 0%, #a7f3d0 50%, #67e8f9 100%);
+        }
+        .connect-gradient {
+            background: linear-gradient(315deg, #a7f3d0 0%, #67e8f9 100%);
+        }
+        .alfabot-section-gradient {
+            background: linear-gradient(to bottom right, #f0fdfa, #ccfbf1);
+            position: relative;
+            overflow: hidden;
+        }
 
-    /* Entry animations */
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+        /* Robot Float Animation */
+        @keyframes floatAnimation {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(1deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
 
-    .card {
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInUp 0.6s ease forwards;
-    }
+        .robot-floating {
+            animation: floatAnimation 4s ease-in-out infinite;
+        }
 
-    .grid > div:nth-child(1) { animation-delay: 0.1s; }
-    .grid > div:nth-child(2) { animation-delay: 0.3s; }
-    .grid > div:nth-child(3) { animation-delay: 0.5s; }
+        /* Entry Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-    /* Hover effects */
-    .card:hover {
-      transform: translateY(-5px) scale(1.05);
-      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
-                  0 10px 10px -5px rgba(0, 0, 0, 0.04);
-                  
-    }
+        .animated-card {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
 
-    /* New model section hover */
-    .new-model:hover {
-      transform: scale(1.02);
-      transition: transform 0.3s ease-in-out;
-    }
+        /* Video Player Simulation */
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(0, 0, 0, 0.4);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
 
-    /* Button hover animation */
-    .cta-button {
-      transition: transform 0.2s ease;
-    }
+        .play-button {
+            width: 80px;
+            height: 80px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s, background-color 0.2s;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
 
-    .cta-button:hover {
-      transform: scale(1.05);
-    }
-  </style>
+        .play-button:hover {
+            transform: scale(1.1);
+            background-color: #fff;
+        }
+
+        /* Specific Detail Styling for Products */
+        .detail-row {
+            transition: all 0.2s ease-in-out;
+            cursor: default;
+        }
+
+        .detail-row:hover {
+            transform: translateX(5px);
+            background-color: rgba(6, 78, 59, 0.1); /* Slight darker tint on hover */
+        }
+        
+        /* Modal Backdrop Fade-in */
+        #order-modal:not(.hidden) {
+            animation: fadeIn 0.3s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        /* Modal Content Slide-in */
+        #order-modal-content {
+            animation: slideIn 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
 </head>
 
-<body class="font-sans antialiased text-gray-800">
+<body class="font-sans antialiased text-gray-800 bg-gray-50">
 
-  <!-- HERO -->
-  <header class="hero-gradient pt-10 pb-20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row justify-between items-start mb-16">
-        <div class="space-y-4">
-          <span class="text-3xl font-bold text-gray-700">Flexbot Company</span>
-          <h1 class="text-5xl font-extrabold text-gray-900">Window Cleaning Robot</h1>
-          <div class="flex space-x-4">
-            <a href="#" class="cta-button px-5 py-2 text-sm font-semibold rounded-full text-white bg-teal-600 hover:bg-teal-700 shadow-md">Buy Now</a>
-            <a href="#" class="cta-button px-5 py-2 text-sm font-semibold rounded-full border border-teal-600 text-teal-600 hover:bg-white/50">Shop All</a>
-          </div>
-        </div>
-      </div>
+    <!-- Sticky Navigation Bar -->
+    <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm shadow-md transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <a href="#" class="text-xl font-extrabold text-flex-teal-700 tracking-wider">
+                    FLEX<span class="text-flex-blue">BOT</span>
+                </a>
+                
+                <!-- Navigation Links -->
+                <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                    <a href="#" class="text-gray-600 hover:text-flex-teal-600 px-3 py-2 text-sm font-medium transition-colors">Home</a>
+                    <a href="#products" class="text-gray-600 hover:text-flex-teal-600 px-3 py-2 text-sm font-medium transition-colors">Products</a>
+                    <a href="#new-model" class="text-gray-600 hover:text-flex-teal-600 px-3 py-2 text-sm font-medium transition-colors">Alfabot X8</a>
+                    <a href="#connect" class="text-gray-600 hover:text-flex-teal-600 px-3 py-2 text-sm font-medium transition-colors">Contact</a>
+                </div>
 
-      <!-- VIDEO + INTRO -->
-      <div class="bg-white/70 backdrop-blur-sm rounded-xl p-6 md:p-10 shadow-2xl grid md:grid-cols-2 gap-8 items-center mt-12">
-        <div class="relative w-full aspect-video rounded-lg overflow-hidden shadow-lg bg-gray-200 flex items-center justify-center">
-          <video class="w-full h-full object-cover" src="video.MP4" autoplay muted loop></video>
-          <button class="play-button text-teal-600 absolute">
-            <svg class="w-8 h-8 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-          </button>
+                <!-- Buy Button (Visible on desktop) -->
+                <div class="hidden sm:block">
+                    <!-- Updated to call showOrderModal with default price -->
+                    <button onclick="showOrderModal('X8', '79.99')" class="cta-button px-4 py-1.5 text-sm font-semibold rounded-lg text-white bg-flex-teal-600 hover:bg-flex-teal-700 shadow-lg transition duration-300">
+                        Order Today
+                    </button>
+                </div>
+            </div>
         </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="hero-gradient pt-16 pb-24 border-b-4 border-flex-teal-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <!-- Text Content -->
+                <div class="space-y-6 md:text-left text-center">
+                    <span class="text-sm font-semibold text-gray-600 uppercase tracking-widest">Innovation for a Clearer View</span>
+                    <h1 class="text-6xl font-extrabold text-gray-900 leading-tight">
+                        Meet the <span class="text-flex-teal-600">Alfabot X8</span>
+                    </h1>
+                    <p class="text-xl text-gray-700 max-w-lg mx-auto md:mx-0">
+                        The High-Quality, Smart Automatic Window Cleaning Robot with Dual Water Spray and precision Frame Detection.
+                    </p>
+                    <div class="flex justify-center md:justify-start space-x-4 pt-4">
+                        <!-- Updated to call showOrderModal with specific price -->
+                        <button onclick="showOrderModal('X8', '79.99')" class="cta-button px-8 py-3 text-lg font-bold rounded-lg text-white bg-flex-teal-600 hover:bg-flex-teal-700 shadow-xl shadow-flex-teal-500/50 transition duration-300 ease-in-out transform hover:scale-105">
+                            Buy Now ($79.99)
+                        </button>
+                        <!-- Changed rounded-full to rounded-lg -->
+                        <a href="#products" class="cta-button px-8 py-3 text-lg font-bold rounded-lg border-2 border-flex-teal-600 text-flex-teal-600 bg-white hover:bg-flex-teal-50 transition duration-300 ease-in-out">
+                            See Features
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Simulated Video/Image Preview -->
+                <!-- Changed rounded-2xl to rounded-lg -->
+                <div class="relative w-full aspect-video rounded-lg overflow-hidden shadow-2xl shadow-flex-teal-700/30 bg-gray-200">
+                    <!-- Placeholder Image for Video -->
+                    <img id="video-image" 
+                         src="https://placehold.co/600x400/047857/ffffff?text=Alfabot+X8+Demo+Video" 
+                         alt="Alfabot X8 Video Preview" 
+                         class="w-full h-full object-cover robot-floating" 
+                         loading="lazy"
+                         onerror="this.onerror=null; this.src='https://placehold.co/600x400/2dd4bf/ffffff?text=Video+Not+Available'"
+                    >
+                    
+                    <!-- Overlay with Play/Pause Button -->
+                    <div id="video-overlay" class="video-overlay">
+                        <button id="play-pause-btn" class="play-button text-flex-teal-700">
+                            <svg class="w-10 h-10 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- PRODUCTS GRID -->
+    <section id="products" class="py-20 bg-gray-product">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-extrabold text-center text-gray-900 mb-4">Our Robot Lineup</h2>
+            <p class="text-center text-xl text-gray-500 mb-12">Compare our powerful, intelligent cleaning solutions.</p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- CARD 1: ALFABOT X8 -->
+                <div class="animated-card card p-6 bg-white border-4 border-flex-teal-500 rounded-lg shadow-xl hover:shadow-2xl hover:shadow-flex-blue/30 transition-all duration-300 ease-in-out transform hover:-translate-y-1">
+                    <img src="https://placehold.co/160x160/047857/ffffff?text=X8" alt="Alfabot X8" class="mx-auto h-40 mb-6 object-contain">
+                    <h3 class="text-2xl font-bold text-flex-teal-700 mb-4 border-b-4 border-flex-teal-500 pb-2">ALFABOT X8 (Featured)</h3>
+                    
+                    <!-- Detailed Spec List Styling (ENHANCED) -->
+                    <div class="text-left text-base space-y-1 text-gray-700 mt-4 border border-gray-200 rounded-md overflow-hidden">
+                        
+                        <!-- Row 1: Alternating background color and added class for hover -->
+                        <div class="detail-row flex justify-between p-3 bg-flex-teal-50/50 text-gray-800">
+                            <span class="font-bold text-flex-teal-700">Dimensions:</span>
+                            <span class="font-medium">24x24x9cm</span>
+                        </div>
+                        
+                        <!-- Row 2 -->
+                        <div class="detail-row flex justify-between p-3 bg-white text-gray-800">
+                            <span class="font-bold text-flex-teal-700">Water Tanks:</span>
+                            <span class="font-medium">1x40ml</span>
+                        </div>
+
+                        <!-- Row 3: Alternating background color -->
+                        <div class="detail-row flex justify-between p-3 bg-flex-teal-50/50 text-gray-800">
+                            <span class="font-bold text-flex-teal-700">Suction Power:</span>
+                            <span class="font-medium">~2,200pa</span>
+                        </div>
+                        
+                        <!-- Row 4 -->
+                        <div class="detail-row flex justify-between p-3 bg-white text-gray-800">
+                            <span class="font-bold text-flex-teal-700">Power Range:</span>
+                            <span class="font-medium">100-240v</span>
+                        </div>
+                        
+                        <!-- Row 5: Alternating background color -->
+                        <div class="detail-row flex justify-between p-3 bg-flex-teal-50/50 text-gray-800">
+                            <span class="font-bold text-flex-teal-700">Cleaning Modes:</span>
+                            <span class="font-medium">Auto, Spot</span>
+                        </div>
+
+                        <p class="flex justify-between text-xl font-extrabold text-white p-3 bg-flex-teal-600">
+                            <span class="font-semibold">PRICE:</span> 
+                            <span>$79.99</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- CARD 2: ALFABOT X7 -->
+                <div class="animated-card card p-6 bg-white border-2 border-gray-300 rounded-lg shadow-lg hover:shadow-2xl hover:shadow-flex-blue/30 transition-all duration-300 ease-in-out transform hover:-translate-y-1">
+                    <img src="https://placehold.co/160x160/2dd4bf/ffffff?text=X7" alt="Alfabot X7" class="mx-auto h-40 mb-6 object-contain">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4 border-b-4 border-gray-300 pb-2">ALFABOT X7</h3>
+                    
+                    <!-- Detailed Spec List Styling (ENHANCED) -->
+                    <div class="text-left text-base space-y-1 text-gray-700 mt-4 border border-gray-200 rounded-md overflow-hidden">
+                        
+                        <!-- Row 1: Alternating background color and added class for hover -->
+                        <div class="detail-row flex justify-between p-3 bg-gray-50/50 text-gray-800">
+                            <span class="font-bold text-gray-700">Dimensions:</span>
+                            <span class="font-medium">25x25x9.3cm</span>
+                        </div>
+                        
+                        <!-- Row 2 -->
+                        <div class="detail-row flex justify-between p-3 bg-white text-gray-800">
+                            <span class="font-bold text-gray-700">Water Tanks:</span>
+                            <span class="font-medium">1x40ml</span>
+                        </div>
+
+                        <!-- Row 3: Alternating background color -->
+                        <div class="detail-row flex justify-between p-3 bg-gray-50/50 text-gray-800">
+                            <span class="font-bold text-gray-700">Suction Power:</span>
+                            <span class="font-medium">~2,600pa</span>
+                        </div>
+                        
+                        <!-- Row 4 -->
+                        <div class="detail-row flex justify-between p-3 bg-white text-gray-800">
+                            <span class="font-bold text-gray-700">Power Range:</span>
+                            <span class="font-medium">100-240v</span>
+                        </div>
+                        
+                        <!-- Row 5: Alternating background color -->
+                        <div class="detail-row flex justify-between p-3 bg-gray-50/50 text-gray-800">
+                            <span class="font-bold text-gray-700">Cleaning Modes:</span>
+                            <span class="font-medium">Edge, Cleaning</span>
+                        </div>
+                        <p class="flex justify-between text-xl font-extrabold text-white p-3 bg-gray-700">
+                            <span class="font-semibold">PRICE:</span> 
+                            <span>$99.99</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- CARD 3: ALFABOT X7SE -->
+                <div class="animated-card card p-6 bg-white border-2 border-gray-300 rounded-lg shadow-lg hover:shadow-2xl hover:shadow-flex-blue/30 transition-all duration-300 ease-in-out transform hover:-translate-y-1">
+                    <img src="https://placehold.co/160x160/2dd4bf/ffffff?text=X7SE" alt="Alfabot X7SE" class="mx-auto h-40 mb-6 object-contain">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4 border-b-4 border-gray-300 pb-2">ALFABOT X7SE</h3>
+                    
+                    <!-- Detailed Spec List Styling (ENHANCED) -->
+                    <div class="text-left text-base space-y-1 text-gray-700 mt-4 border border-gray-200 rounded-md overflow-hidden">
+                        
+                        <!-- Row 1: Alternating background color and added class for hover -->
+                        <div class="detail-row flex justify-between p-3 bg-gray-50/50 text-gray-800">
+                            <span class="font-bold text-gray-700">Dimensions:</span>
+                            <span class="font-medium">25x25x9.3cm</span>
+                        </div>
+                        
+                        <!-- Row 2 -->
+                        <div class="detail-row flex justify-between p-3 bg-white text-gray-800">
+                            <span class="font-bold text-gray-700">Water Tanks:</span>
+                            <span class="font-medium">1x56ml</span>
+                        </div>
+
+                        <!-- Row 3: Alternating background color -->
+                        <div class="detail-row flex justify-between p-3 bg-gray-50/50 text-gray-800">
+                            <span class="font-bold text-gray-700">Suction Power:</span>
+                            <span class="font-medium">~2,600pa</span>
+                        </div>
+                        
+                        <!-- Row 4 -->
+                        <div class="detail-row flex justify-between p-3 bg-white text-gray-800">
+                            <span class="font-bold text-gray-700">Power Range:</span>
+                            <span class="font-medium">100-240v</span>
+                        </div>
+                        
+                        <!-- Row 5: Alternating background color -->
+                        <div class="detail-row flex justify-between p-3 bg-gray-50/50 text-gray-800">
+                            <span class="font-bold text-gray-700">Cleaning Modes:</span>
+                            <span class="font-medium">Edge, Manual</span>
+                        </div>
+                        <p class="flex justify-between text-xl font-extrabold text-white p-3 bg-gray-700">
+                            <span class="font-semibold">PRICE:</span> 
+                            <span>$119.99</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <a href="#" class="cta-button px-8 py-3 text-lg font-semibold rounded-lg border-2 border-gray-700 text-gray-700 hover:bg-gray-100 transition duration-300 ease-in-out transform hover:scale-105">
+                    View Complete Catalog
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW MODEL SECTION -->
+    <section id="new-model" class="alfabot-section-gradient py-24 border-t border-b border-flex-teal-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white p-8 md:p-12 rounded-lg shadow-2xl grid md:grid-cols-2 gap-12 items-center transition-all duration-500 ease-in-out hover:shadow-3xl hover:shadow-flex-teal-500/30">
+                <!-- Image -->
+                <div class="order-1 md:order-2 flex justify-center transform hover:scale-[1.03] transition-transform duration-500">
+                    <img src="https://placehold.co/500x500/065f46/ffffff?text=ALFABOT+X8+PRO+VIEW" 
+                         alt="Alfabot X8 Large View" 
+                         class="w-full max-w-sm rounded-md shadow-2xl border-4 border-flex-teal-500/50"
+                         loading="lazy"
+                         onerror="this.onerror=null; this.src='https://placehold.co/500x500/2dd4bf/ffffff?text=New+Model+Placeholder'"
+                    >
+                </div>
+
+                <!-- Features List -->
+                <div class="order-2 md:order-1">
+                    <h2 class="text-4xl font-extrabold text-gray-900 mb-3">Introducing the <span class="text-flex-teal-600">Alfabot X8 PRO</span></h2>
+                    <p class="text-lg text-gray-500 mb-8">Next-generation power and intelligence, redesigned for larger windows.</p>
+                    
+                    <ul class="space-y-4 text-gray-700 text-lg border border-gray-300 p-4 rounded-md bg-gray-product shadow-inner">
+                        <li class="flex items-center justify-between border-b border-gray-400 pb-3 transition-colors hover:text-flex-teal-600 hover:bg-white/50 p-2 -m-2 rounded-md">
+                            <span class="font-bold flex-shrink-0 text-gray-800">
+                                <svg class="w-5 h-5 inline mr-2 text-flex-blue" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                Larger Dimensions:
+                            </span> 
+                            <span class="font-medium text-flex-teal-600">26.7 x 26 x 9 cm</span>
+                        </li>
+                        <li class="flex items-center justify-between border-b border-gray-400 pb-3 transition-colors hover:text-flex-teal-600 hover:bg-white/50 p-2 -m-2 rounded-md">
+                            <span class="font-bold flex-shrink-0 text-gray-800">
+                                <svg class="w-5 h-5 inline mr-2 text-flex-blue" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                Dual Water Tanks:
+                            </span> 
+                            <span class="font-medium text-flex-teal-600">2 x 80 ml (160ml Total)</span>
+                        </li>
+                        <li class="flex items-center justify-between border-b border-gray-400 pb-3 transition-colors hover:text-flex-teal-600 hover:bg-white/50 p-2 -m-2 rounded-md">
+                            <span class="font-bold flex-shrink-0 text-gray-800">
+                                <svg class="w-5 h-5 inline mr-2 text-flex-blue" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                Intelligent Navigation:
+                            </span> 
+                            <span class="font-medium text-flex-teal-600">Frame Detection & Deep Clean</span>
+                        </li>
+                        <li class="flex items-center justify-between border-t border-gray-400 pt-3 transition-colors hover:text-flex-teal-600 hover:bg-white/50 p-2 -m-2 rounded-md">
+                            <span class="font-bold flex-shrink-0 text-gray-800">
+                                <svg class="w-5 h-5 inline mr-2 text-flex-blue" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                Introductory Price:
+                            </span> 
+                            <div class="flex flex-col sm:flex-row items-end sm:items-center space-x-2">
+                                <span class="text-xl font-extrabold text-red-500 line-through">$149.99</span>
+                                <button onclick="showOrderModal('X8 PRO', '139.99')" class="text-2xl font-extrabold text-flex-teal-700 hover:text-flex-teal-600 transition-colors bg-white/50 px-2 py-1 rounded-md">$139.99</button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="connect" class="connect-gradient pt-16 pb-10 text-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-extrabold mb-12 text-gray-900">Connect with Us</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div class="space-y-4">
+                    <h3 class="font-bold text-xl text-flex-teal-700">Main Office</h3>
+                    <p class="text-base leading-relaxed">
+                        Wat Bo District, Siem Reap, Cambodia<br>
+                        Phone: <a href="tel:+855979324179" class="hover:text-flex-teal-600 transition">(+855) 097 932 4179</a>
+                    </p>
+                </div>
+
+                <div class="space-y-3">
+                    <h3 class="font-bold text-xl text-flex-teal-700">Social Media</h3>
+                    <ul class="text-base space-y-2">
+                        <li>
+                            <a href="#" class="flex items-center hover:text-flex-teal-600 transition">
+                                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.286h3.332l-.532 3.47h-2.8V24c5.736-.9 10.124-5.864 10.124-11.854z"/></svg>
+                                Facebook
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center hover:text-flex-teal-600 transition">
+                                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M7 6a2 2 0 00-2 2v8a2 2 0 002 2h10a2 2 0 002-2V8a2 2 0 00-2-2H7zm0-4h10a4 4 0 014 4v8a4 4 0 01-4 4H7a4 4 0 01-4-4V6a4 4 0 014-4zm7 6a1 1 0 100 2 1 1 0 000-2zM9 12a3 3 0 106 0 3 3 0 00-6 0z"/></svg>
+                                Instagram
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center hover:text-flex-teal-600 transition">
+                                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M20 7.828c-1.123.639-2.327 1.07-3.58 1.258a6.3 6.3 0 002.76-3.418c-1.18.7-2.493 1.2-3.882 1.455A6.27 6.27 0 0012 5.5c-3.456 0-6.273 2.817-6.273 6.273 0 .49.056.97.16 1.433-5.215-.26-9.846-2.75-12.946-6.52A6.26 6.26 0 003.73 17.5c-1.23.884-2.656 1.34-4.13.11 0 .285.086.56.246.812a6.273 6.273 0 00.99 1.155c.394.34.82.646 1.277.917-.46.046-.92.067-1.38.067-.28 0-.555-.02-.82-.06C1.98 22.82 5.76 24.5 10.046 24.5c9.055 0 14.004-7.513 14.004-14.004 0-.214-.005-.427-.013-.639A10.04 10.04 0 0024 7.828z"/></svg>
+                                Tiktok@flexbotcompany
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="font-bold text-xl text-flex-teal-700">Email Contact</h3>
+                    <p class="text-base leading-relaxed">
+                        For sales and inquiries:<br>
+                        <a href="mailto:flexbotcompany@gmail.com" class="hover:text-flex-teal-600 font-semibold transition">flexbotcompany@gmail.com</a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="text-center mt-16 pt-8 border-t border-gray-300/50 text-sm text-gray-600">
+                &copy; 2025 Flexbot Company. All rights reserved. | <a href="#" class="hover:text-flex-teal-600">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- ORDER MODAL (Hidden by default) -->
+    <!-- The backdrop is the first child of the modal, closing the modal when clicked -->
+    <div id="order-modal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-gray-900 bg-opacity-75 flex items-start justify-center p-4 sm:p-8" onclick="if(event.target.id === 'order-modal') hideOrderModal()">
         
-        <div class="md:text-left text-center">
-          <p class="text-sm font-medium text-gray-600 mb-1">The best product is here.</p>
-          <h2 class="text-3xl font-extrabold text-gray-900 mb-2">Window Cleaning Robot</h2>
-          <h3 class="text-xl font-bold text-teal-600 mb-4">Alfabot X8</h3>
-          <p class="text-gray-600 text-sm leading-relaxed">
-            High Quality Smart Automatic Window Cleaning Robot with Infrared Remote Control, Dual Water Spray, and Frame Detection.
-          </p>
+        <!-- Modal Content Container -->
+        <div id="order-modal-content" class="bg-white rounded-xl shadow-3xl w-full max-w-2xl mt-8 transform transition-all duration-300 overflow-hidden">
+            
+            <!-- Modal Header -->
+            <div class="p-6 bg-flex-teal-600 flex justify-between items-center">
+                <h3 class="text-2xl font-extrabold text-white">Complete Your Order</h3>
+                <button onclick="hideOrderModal()" class="text-white hover:text-gray-200 transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+
+            <!-- Modal Body: Two Columns (Form and Payment/QR) -->
+            <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <!-- Column 1: Customer Details Form -->
+                <div>
+                    <h4 class="text-xl font-bold text-flex-teal-700 mb-4 border-b pb-2">Shipping Information</h4>
+                    <form id="checkout-form" class="space-y-4">
+                        
+                        <!-- Product Selection & Price (Required by user) -->
+                        <div>
+                            <label for="product-select" class="block text-sm font-medium text-gray-700">Select Product & Price</label>
+                            <select id="product-select" name="product" required
+                                class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-flex-blue focus:border-flex-blue sm:text-sm rounded-lg border shadow-sm bg-gray-50 font-semibold text-gray-800">
+                                <option value="X8_79.99">Alfabot X8 ($79.99)</option>
+                                <option value="X7_99.99">Alfabot X7 ($99.99)</option>
+                                <option value="X7SE_119.99">Alfabot X7SE ($119.99)</option>
+                                <option value="X8PRO_139.99">Alfabot X8 PRO ($139.99)</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Name Input -->
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
+                            <input type="text" id="name" name="name" required
+                                class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-flex-teal-500 focus:ring-flex-teal-500 border p-2.5">
+                        </div>
+
+                        <!-- Email Input -->
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
+                            <input type="email" id="email" name="email" required
+                                class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-flex-teal-500 focus:ring-flex-teal-500 border p-2.5">
+                        </div>
+
+                        <!-- Address Input -->
+                        <div>
+                            <label for="address" class="block text-sm font-medium text-gray-700">Shipping Address</label>
+                            <input type="text" id="address" name="address" required
+                                class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-flex-teal-500 focus:ring-flex-teal-500 border p-2.5">
+                        </div>
+
+                        <!-- State and Country (Side by side) -->
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label for="state" class="block text-sm font-medium text-gray-700">State / Province</label>
+                                <input type="text" id="state" name="state" required
+                                    class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-flex-teal-500 focus:ring-flex-teal-500 border p-2.5">
+                            </div>
+                            <div>
+                                <label for="country" class="block text-sm font-medium text-gray-700">Country</label>
+                                <input type="text" id="country" name="country" required
+                                    class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-flex-teal-500 focus:ring-flex-teal-500 border p-2.5">
+                            </div>
+                        </div>
+
+                        <button type="submit" class="w-full mt-6 px-4 py-3 text-lg font-semibold rounded-lg text-white bg-flex-teal-600 hover:bg-flex-teal-700 transition duration-300 shadow-lg transform hover:scale-[1.01]">
+                            Place Order (View QR)
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Column 2: Payment/QR Code -->
+                <div class="p-4 bg-gray-50 rounded-lg border-2 border-flex-teal-500/50">
+                    <h4 class="text-xl font-bold text-flex-teal-700 mb-4 border-b pb-2">Payment (Simulated)</h4>
+                    
+                    <p class="text-sm text-gray-600 mb-4">Scan the QR code below with your preferred payment app to complete the transaction for your selected robot.</p>
+
+                    <!-- QR Code Placeholder -->
+                    <div id="qr-code-container" class="flex justify-center items-center h-48 bg-white p-4 rounded-md shadow-inner border border-gray-200">
+                        <!-- Placeholder for QR Code (Simulated) -->
+                        <img id="qr-code-img"
+                             src="https://placehold.co/200x200/000000/FFFFFF?text=SCAN+TO+PAY"
+                             alt="QR Code Payment"
+                             class="w-48 h-48 object-contain transition-all duration-500 transform hover:scale-105"
+                             loading="lazy"
+                        >
+                    </div>
+
+                    <div class="mt-4 text-center">
+                        <p class="text-lg font-bold text-gray-900" id="qr-payment-amount">
+                            Amount: $79.99
+                        </p>
+                        <p class="text-xs text-red-500 mt-2">
+                            *This is a simulated checkout for demonstration purposes only.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div id="success-message" class="hidden p-6 text-center bg-green-100 text-green-800 font-semibold">
+                Thank you! Your order has been placed successfully. A confirmation email has been sent.
+            </div>
+
         </div>
-      </div>
     </div>
-  </header>
 
-  <!-- PRODUCTS GRID -->
-  <section class="py-16 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl font-bold text-center mb-10">Smart Window Cleaning Robots</h2>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- CARD 1 -->
-        <div class="card p-6 border-4 border-teal-500 rounded-xl shadow-xl text-center transition-transform duration-300 ease-in-out">
-          <img src="Alfabotx8.png" alt="Alfabot X8" class="mx-auto h-40 mb-4 object-contain">
-          <h3 class="text-xl font-bold text-teal-600 mb-2">ALFABOT</h3>
-          <div class="text-left text-sm space-y-1 text-gray-600">
-            <p><span class="font-semibold">Dimensions:</span> 24x24x9cm</p>
-            <p><span class="font-semibold">Water Tanks:</span> 1x40ml</p>
-            <p><span class="font-semibold">Suction:</span> ~2,200pa</p>
-            <p><span class="font-semibold">Power Range:</span> 100-240v</p>
-            <p><span class="font-semibold">Modes:</span> Auto, Spot</p>
-            <p><span class="font-semibold">Price:</span> ~USD 79.99</p>
-          </div>
-        </div>
+    <script>
+        // --- Modal and Form Logic ---
+        
+        const modal = document.getElementById('order-modal');
+        const productSelect = document.getElementById('product-select');
+        const qrPaymentAmount = document.getElementById('qr-payment-amount');
+        const checkoutForm = document.getElementById('checkout-form');
+        const successMessage = document.getElementById('success-message');
 
-        <!-- CARD 2 -->
-        <div class="card p-6 border-4 border-teal-500 rounded-xl shadow-xl text-center transition-transform duration-300 ease-in-out">
-          <img src="Alfabotx7.png" alt="Alfabot X7" class="mx-auto h-40 mb-4 object-contain">
-          <h3 class="text-xl font-bold text-gray-800 mb-2">ALFABOT X7</h3>
-          <div class="text-left text-sm space-y-1 text-gray-600">
-            <p><span class="font-semibold">Dimensions:</span> 25x25x9.3cm</p>
-            <p><span class="font-semibold">Water Tanks:</span> 1x40ml</p>
-            <p><span class="font-semibold">Suction:</span> ~2,600pa</p>
-            <p><span class="font-semibold">Power Range:</span> 100-240v</p>
-            <p><span class="font-semibold">Modes:</span> Edge, Cleaning</p>
-            <p><span class="font-semibold">Price:</span> ~USD 99.99</p>
-          </div>
-        </div>
+        const productPrices = {
+            'X8_79.99': 79.99,
+            'X7_99.99': 99.99,
+            'X7SE_119.99': 119.99,
+            'X8PRO_139.99': 139.99
+        };
 
-        <!-- CARD 3 -->
-        <div class="card p-6 border-4 border-teal-500 rounded-xl shadow-xl text-center transition-transform duration-300 ease-in-out">
-          <img src="Alfabotxt10s.png" alt="Alfabot XT10S" class="mx-auto h-40 mb-4 object-contain">
-          <h3 class="text-xl font-bold text-gray-800 mb-2">ALFABOT X7SE</h3>
-          <div class="text-left text-sm space-y-1 text-gray-600">
-            <p><span class="font-semibold">Dimensions:</span> 25x25x9.3cm</p>
-            <p><span class="font-semibold">Water Tanks:</span> 1x56ml</p>
-            <p><span class="font-semibold">Suction:</span> ~2,600pa</p>
-            <p><span class="font-semibold">Power Range:</span> 100-240v</p>
-            <p><span class="font-semibold">Modes:</span> Edge, Manual</p>
-            <p><span class="font-semibold">Price:</span> ~USD 119.99</p>
-          </div>
-        </div>
-      </div>
+        function updateQrAmount() {
+            const selectedValue = productSelect.value;
+            const price = productPrices[selectedValue];
+            qrPaymentAmount.textContent = `Amount: $${price.toFixed(2)}`;
+            console.log(`Updated QR payment amount to $${price.toFixed(2)} for product ${selectedValue}`);
+        }
 
-      <div class="text-center mt-10">
-        <a href="#" class="cta-button px-6 py-2 text-sm font-semibold rounded-full border border-gray-700 text-gray-700 hover:bg-gray-100 transition">
-          Shop All
-        </a>
-      </div>
-    </div>
-  </section>
+        function showOrderModal(modelName, price) {
+            // Reset state
+            checkoutForm.reset();
+            successMessage.classList.add('hidden');
+            checkoutForm.classList.remove('hidden');
+            
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling background
+            
+            // Pre-select the correct option based on the button clicked
+            const valueToSelect = `${modelName}_${price}`;
+            if (productPrices.hasOwnProperty(valueToSelect)) {
+                productSelect.value = valueToSelect;
+            } else {
+                // Default to X8 if the specific product isn't found
+                productSelect.value = 'X8_79.99';
+            }
+            
+            // Update the displayed price for the QR code
+            updateQrAmount();
+        }
 
-  <!-- NEW MODEL -->
-  <section class="alfabot-section-gradient py-20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 new-model">
-      <div class="grid md:grid-cols-2 gap-10 items-center">
-        <div class="p-6 border-4 border-teal-500 rounded-xl shadow-xl text-center">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">New Model Alfabot X8</h2>
-          <ul class="space-y-3 text-gray-700 text-lg">
-            <li class="flex justify-between border-b border-gray-300 pb-2">
-              <span class="font-semibold">Dimensions:</span> <span>26.7 x 26 x 9 cm</span>
-            </li>
-            <li class="flex justify-between border-b border-gray-300 pb-2">
-              <span class="font-semibold">Water Tanks:</span> <span>2 x 80 ml</span>
-            </li>
-            <li class="flex justify-between border-b border-gray-300 pb-2">
-              <span class="font-semibold">Suction:</span> <span>Auto, Spot, Edge, Frame detection</span>
-            </li>
-            <li class="flex justify-between border-b border-gray-300 pb-2">
-              <span class="font-semibold">Price:</span> <span>~USD 139.99</span>
-            </li>
-          </ul>
-        </div>
-        <div class="order-1 md:order-2 flex justify-center">
-          <img src="Newmodel.png" alt="Alfabot X8 Large View" class="w-full max-w-sm rounded-lg shadow-2xl">
-        </div>
-      </div>
-    </div>
-  </section>
+        function hideOrderModal() {
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto'; // Restore scrolling
+        }
 
-  <!-- FOOTER -->
-  <footer class="connect-gradient pt-16 pb-10 text-gray-800">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold mb-10">Connect with Us</h2>
+        // Event listener for product selection change to update QR price
+        productSelect.addEventListener('change', updateQrAmount);
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-        <div class="space-y-4">
-          <h3 class="font-semibold text-lg">Main Office</h3>
-          <p class="text-sm">
-            Wat Bo.<br>Siem Reap, Cambodia<br>(+855) 0979324179
-          </p>
-        </div>
+        // Form Submission Handler (Simulated)
+        checkoutForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Simulate processing the order data
+            const formData = new FormData(checkoutForm);
+            const data = Object.fromEntries(formData.entries());
+            
+            console.log('--- Order Submitted (Simulated) ---');
+            console.log('Product:', data.product);
+            console.log('Name:', data.name);
+            console.log('Email:', data.email);
+            console.log('Address:', `${data.address}, ${data.state}, ${data.country}`);
+            console.log('-----------------------------------');
 
-        <div class="space-y-3">
-          <h3 class="font-semibold text-lg">Social Media</h3>
-          <ul class="text-sm space-y-1">
-            <li><a href="#" class="hover:text-teal-600">Facebook:https://bit.ly/478Nebn</a></li>
-            <li><a href="#" class="hover:text-teal-600">Instagram:https://bit.ly/478Nebn</a></li>
-            <li><a href="#" class="hover:text-teal-600">Tiktok@flexbotcompany</a></li>
-          </ul>
-        </div>
+            // Show success message and hide the form content
+            checkoutForm.classList.add('hidden');
+            successMessage.classList.remove('hidden');
+            
+            // In a real application, you would send this data to a server here.
+        });
 
-        <div>
-          <h3 class="font-semibold text-lg">Email</h3>
-          <p class="text-sm">
-            Email: <a href="mailto:flexbotcompany@gmail.com" class="hover:text-teal-600">flexbotcompany@gmail.com</a>
-          </p>
-        </div>
-      </div>
 
-      <div class="text-center mt-12 pt-6 border-t border-gray-300 text-sm text-gray-600">
-        &copy; 2025 Flexbot Company.
-      </div>
-    </div>
-  </footer>
+        // --- Other Document Logic (Existing) ---
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Video Player Simulation Logic
+            const overlay = document.getElementById('video-overlay');
+            const playPauseBtn = document.getElementById('play-pause-btn');
+            const videoImage = document.getElementById('video-image');
+            let isPlaying = false;
+
+            const updatePlayerState = () => {
+                if (isPlaying) {
+                    // Change to Pause icon (simulated)
+                    playPauseBtn.innerHTML = '<svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>';
+                    overlay.style.backgroundColor = 'rgba(0, 0, 0, 0)';
+                    playPauseBtn.style.opacity = '0';
+                    videoImage.style.filter = 'blur(0)';
+                    console.log('Video is playing...');
+                } else {
+                    // Change to Play icon (simulated)
+                    playPauseBtn.innerHTML = '<svg class="w-10 h-10 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
+                    overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.4)';
+                    playPauseBtn.style.opacity = '1';
+                    videoImage.style.filter = 'blur(1px)';
+                    console.log('Video is paused...');
+                }
+            };
+
+            const togglePlay = () => {
+                isPlaying = !isPlaying;
+                updatePlayerState();
+            };
+
+            overlay.addEventListener('click', togglePlay);
+            updatePlayerState(); // Initial state setup
+
+            // 2. Add animation classes after load for staggered entry
+            const cardElements = document.querySelectorAll('.animated-card');
+            cardElements.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.15 + 0.5}s`;
+            });
+            
+            // 3. Ensure the robot image starts floating after content load
+            const heroRobot = document.querySelector('.robot-floating');
+            if (heroRobot) {
+                // Add class explicitly to ensure the animation starts
+                heroRobot.classList.add('robot-floating');
+            }
+        });
+    </script>
 </body>
 </html>
-
-
