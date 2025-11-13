@@ -135,13 +135,12 @@
     <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm shadow-md transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
-                
                 <!-- Logo -->
                 <a href="#" class="text-xl font-extrabold text-flex-teal-700 tracking-wider">
                     FLEX<span class="text-flex-blue">BOT</span>
                 </a>
                 
-                <!-- Desktop Navigation Links (Visible > sm) -->
+                <!-- Navigation Links -->
                 <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
                     <a href="#" class="text-gray-600 hover:text-flex-teal-600 px-3 py-2 text-sm font-medium transition-colors">Home</a>
                     <a href="#products" class="text-gray-600 hover:text-flex-teal-600 px-3 py-2 text-sm font-medium transition-colors">Products</a>
@@ -149,41 +148,13 @@
                     <a href="#connect" class="text-gray-600 hover:text-flex-teal-600 px-3 py-2 text-sm font-medium transition-colors">Contact</a>
                 </div>
 
-                <!-- Right Side: Hamburger Button (Mobile) and Desktop Order Button -->
-                <div class="flex items-center space-x-3">
-                    
-                    <!-- Desktop Order Button (Visible only on desktop, hidden on mobile) -->
-                    <button onclick="showOrderModal('X8', '79.99')" class="hidden sm:block cta-button px-4 py-1.5 text-sm font-semibold rounded-lg text-white bg-flex-teal-600 hover:bg-flex-teal-700 shadow-lg transition duration-300">
+                <!-- Buy Button (Visible on desktop) -->
+                <div class="hidden sm:block">
+                    <!-- Updated to call showOrderModal with default price -->
+                    <button onclick="showOrderModal('X8', '79.99')" class="cta-button px-4 py-1.5 text-sm font-semibold rounded-lg text-white bg-flex-teal-600 hover:bg-flex-teal-700 shadow-lg transition duration-300">
                         Order Today
                     </button>
-                    
-                    <!-- Hamburger Button (Visible < sm) -->
-                    <div class="flex items-center sm:hidden">
-                        <button id="mobile-menu-button" type="button" class="inline-flex items-center justify-center p-2 rounded-lg text-gray-500 hover:text-flex-teal-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-flex-teal-500 transition duration-150 ease-in-out" aria-controls="mobile-menu-links" aria-expanded="false">
-                            <!-- Menu Icon (Open) -->
-                            <svg id="menu-icon" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
-                            <!-- Close Icon (Hidden) -->
-                            <svg id="close-icon" class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
-                        </button>
-                    </div>
-
                 </div>
-            </div>
-        </div>
-        
-        <!-- Mobile Menu Container (Initially hidden) -->
-        <div class="sm:hidden hidden" id="mobile-menu-links">
-            <div class="pt-2 pb-3 space-y-1 px-2 border-t border-gray-100 flex flex-col">
-                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-flex-teal-50 hover:text-flex-teal-600 transition-colors">Home</a>
-                <a href="#products" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-flex-teal-50 hover:text-flex-teal-600 transition-colors">Products</a>
-                <a href="#new-model" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-flex-teal-50 hover:text-flex-teal-600 transition-colors">Alfabot X8</a>
-                <a href="#connect" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-flex-teal-50 hover:text-flex-teal-600 transition-colors">Contact</a>
-                
-                <!-- NEW: Order Button for Mobile (Full Width Block) -->
-                <button onclick="showOrderModal('X8', '79.99'); toggleMobileMenu()" 
-                        class="w-full mt-4 px-3 py-2 text-base font-bold rounded-lg text-white bg-flex-teal-600 hover:bg-flex-teal-700 shadow-md transition duration-300">
-                    Place Order Now
-                </button>
             </div>
         </div>
     </nav>
@@ -195,13 +166,13 @@
                 <!-- Text Content -->
                 <div class="space-y-6 md:text-left text-center">
                     <span class="text-sm font-semibold text-gray-600 uppercase tracking-widest">Innovation for a Clearer View</span>
-                    <h1 class="text-5xl sm:text-6xl font-extrabold text-gray-900 leading-tight">
+                    <h1 class="text-6xl font-extrabold text-gray-900 leading-tight">
                         Meet the <span class="text-flex-teal-600">Alfabot X8</span>
                     </h1>
-                    <p class="text-lg sm:text-xl text-gray-700 max-w-lg mx-auto md:mx-0">
+                    <p class="text-xl text-gray-700 max-w-lg mx-auto md:mx-0">
                         The High-Quality, Smart Automatic Window Cleaning Robot with Dual Water Spray and precision Frame Detection.
                     </p>
-                    <div class="flex flex-col sm:flex-row justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-4 pt-4">
+                    <div class="flex justify-center md:justify-start space-x-4 pt-4">
                         <!-- Updated to call showOrderModal with specific price -->
                         <button onclick="showOrderModal('X8', '79.99')" class="cta-button px-8 py-3 text-lg font-bold rounded-lg text-white bg-flex-teal-600 hover:bg-flex-teal-700 shadow-xl shadow-flex-teal-500/50 transition duration-300 ease-in-out transform hover:scale-105">
                             Buy Now ($79.99)
@@ -215,10 +186,10 @@
 
                 <!-- Simulated Video/Image Preview -->
                 <!-- Changed rounded-2xl to rounded-lg -->
-                <div class="relative w-full aspect-video rounded-lg overflow-hidden shadow-2xl shadow-flex-teal-700/30 bg-gray-200 mt-8 md:mt-0">
+                <div class="relative w-full aspect-video rounded-lg overflow-hidden shadow-2xl shadow-flex-teal-700/30 bg-gray-200">
                     <!-- Placeholder Image for Video -->
                     <img id="video-image" 
-                         src="https://placehold.co/600x400/047857/ffffff?text=Alfabot+X8+Demo+Video" 
+                         src="vdoscreensort.png" 
                          alt="Alfabot X8 Video Preview" 
                          class="w-full h-full object-cover robot-floating" 
                          loading="lazy"
@@ -239,13 +210,13 @@
     <!-- PRODUCTS GRID -->
     <section id="products" class="py-20 bg-gray-product">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl sm:text-4xl font-extrabold text-center text-gray-900 mb-4">Our Robot Lineup</h2>
-            <p class="text-center text-lg sm:text-xl text-gray-500 mb-12">Compare our powerful, intelligent cleaning solutions.</p>
+            <h2 class="text-4xl font-extrabold text-center text-gray-900 mb-4">Our Robot Lineup</h2>
+            <p class="text-center text-xl text-gray-500 mb-12">Compare our powerful, intelligent cleaning solutions.</p>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- CARD 1: ALFABOT X8 -->
                 <div class="animated-card card p-6 bg-white border-4 border-flex-teal-500 rounded-lg shadow-xl hover:shadow-2xl hover:shadow-flex-blue/30 transition-all duration-300 ease-in-out transform hover:-translate-y-1">
-                    <img src="https://placehold.co/160x160/047857/ffffff?text=X8" alt="Alfabot X8" class="mx-auto h-40 mb-6 object-contain">
+                    <img src="Alfabotx8.png" alt="Alfabot X8" class="mx-auto h-40 mb-6 object-contain">
                     <h3 class="text-2xl font-bold text-flex-teal-700 mb-4 border-b-4 border-flex-teal-500 pb-2">ALFABOT X8 (Featured)</h3>
                     
                     <!-- Detailed Spec List Styling (ENHANCED) -->
@@ -290,7 +261,7 @@
 
                 <!-- CARD 2: ALFABOT X7 -->
                 <div class="animated-card card p-6 bg-white border-2 border-gray-300 rounded-lg shadow-lg hover:shadow-2xl hover:shadow-flex-blue/30 transition-all duration-300 ease-in-out transform hover:-translate-y-1">
-                    <img src="https://placehold.co/160x160/2dd4bf/ffffff?text=X7" alt="Alfabot X7" class="mx-auto h-40 mb-6 object-contain">
+                    <img src="Alfabotx7.png" alt="Alfabot X7" class="mx-auto h-40 mb-6 object-contain">
                     <h3 class="text-2xl font-bold text-gray-800 mb-4 border-b-4 border-gray-300 pb-2">ALFABOT X7</h3>
                     
                     <!-- Detailed Spec List Styling (ENHANCED) -->
@@ -334,7 +305,7 @@
 
                 <!-- CARD 3: ALFABOT X7SE -->
                 <div class="animated-card card p-6 bg-white border-2 border-gray-300 rounded-lg shadow-lg hover:shadow-2xl hover:shadow-flex-blue/30 transition-all duration-300 ease-in-out transform hover:-translate-y-1">
-                    <img src="https://placehold.co/160x160/2dd4bf/ffffff?text=X7SE" alt="Alfabot X7SE" class="mx-auto h-40 mb-6 object-contain">
+                    <img src="Alfabotxt10s.png" alt="Alfabot X7SE" class="mx-auto h-40 mb-6 object-contain">
                     <h3 class="text-2xl font-bold text-gray-800 mb-4 border-b-4 border-gray-300 pb-2">ALFABOT X7SE</h3>
                     
                     <!-- Detailed Spec List Styling (ENHANCED) -->
@@ -391,7 +362,7 @@
             <div class="bg-white p-8 md:p-12 rounded-lg shadow-2xl grid md:grid-cols-2 gap-12 items-center transition-all duration-500 ease-in-out hover:shadow-3xl hover:shadow-flex-teal-500/30">
                 <!-- Image -->
                 <div class="order-1 md:order-2 flex justify-center transform hover:scale-[1.03] transition-transform duration-500">
-                    <img src="https://placehold.co/500x500/065f46/ffffff?text=ALFABOT+X8+PRO+VIEW" 
+                    <img src="Newmodel.png" 
                          alt="Alfabot X8 Large View" 
                          class="w-full max-w-sm rounded-md shadow-2xl border-4 border-flex-teal-500/50"
                          loading="lazy"
@@ -401,7 +372,7 @@
 
                 <!-- Features List -->
                 <div class="order-2 md:order-1">
-                    <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-3">Introducing the <span class="text-flex-teal-600">Alfabot X8 PRO</span></h2>
+                    <h2 class="text-4xl font-extrabold text-gray-900 mb-3">Introducing the <span class="text-flex-teal-600">Alfabot X8 PRO</span></h2>
                     <p class="text-lg text-gray-500 mb-8">Next-generation power and intelligence, redesigned for larger windows.</p>
                     
                     <ul class="space-y-4 text-gray-700 text-lg border border-gray-300 p-4 rounded-md bg-gray-product shadow-inner">
@@ -684,47 +655,10 @@
             // In a real application, you would send this data to a server here.
         });
 
-        // --- Mobile Menu Logic ---
-        function toggleMobileMenu() {
-            const button = document.getElementById('mobile-menu-button');
-            const menu = document.getElementById('mobile-menu-links');
-            const menuIcon = document.getElementById('menu-icon');
-            const closeIcon = document.getElementById('close-icon');
-
-            const isHidden = menu.classList.toggle('hidden');
-            
-            if (isHidden) {
-                menuIcon.classList.remove('hidden');
-                closeIcon.classList.add('hidden');
-            } else {
-                menuIcon.classList.add('hidden');
-                closeIcon.classList.remove('hidden');
-            }
-        }
-
-        function setupMobileMenuToggle() {
-            const button = document.getElementById('mobile-menu-button');
-            const menu = document.getElementById('mobile-menu-links');
-
-            button.addEventListener('click', toggleMobileMenu);
-
-            // Close menu when a link is clicked (important for UX)
-            menu.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    if (!menu.classList.contains('hidden')) {
-                        toggleMobileMenu();
-                    }
-                });
-            });
-        }
-
 
         // --- Other Document Logic (Existing) ---
 
         document.addEventListener('DOMContentLoaded', () => {
-            // Setup Mobile Menu
-            setupMobileMenuToggle();
-            
             // 1. Video Player Simulation Logic
             const overlay = document.getElementById('video-overlay');
             const playPauseBtn = document.getElementById('play-pause-btn');
